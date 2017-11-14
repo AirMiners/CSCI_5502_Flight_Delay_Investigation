@@ -1,0 +1,10 @@
+To understand the basic statistics of flight delays, we are plotting the below Graphs:
+
+1. Airline vs Number of Delays wrt threshold 15min  -- Monthly wise, Yearly wise
+2. Airline vs Number of Delays wrt Threshold 30min  -- Monthly wise, Yearly wise
+
+3. Total Number of delays with threshold 15min -- Monthly wise, Yearly wise
+4. Total Number of delays with threshold 30min -- Monthly wise, Yearly wise
+
+5. Airport Arrival vs Number of Delays with threshold 15min  -- Monthly wise, Yearly wise
+6. Airport Arrival vs Number of Delays with threshold 30min  -- Monthly wise, Yearly wise

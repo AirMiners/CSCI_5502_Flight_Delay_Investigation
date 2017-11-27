@@ -2,12 +2,14 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
 import matplotlib.pyplot as plt
 
 ######################## Training Logistic Regression Model############################
-delay_threshold = 30
+delay_threshold = 30 #In minutes
 train_month =1
-for year in range (2012, 2015):
+for year in range (2012, 2016):
     train_data = pd.read_csv("DataSet/" + str(year) +"/" + str(train_month) +"/" + str(train_month)+".csv")
     if year == 2012:
         x_train = train_data[['DEST_AIRPORT_ID', 'MONTH', 'DAY_OF_MONTH', 'AIRLINE_ID', 'ORIGIN_AIRPORT_ID']].values
@@ -29,8 +31,8 @@ y_train= np.where(y_train <= delay_threshold, 0, 1)
 Y_train = y_train.reshape(-1, 1)
 
 
-LogReg = LogisticRegression()
-LogReg.fit(X_train, Y_train)
+clf = RandomForestClassifier()
+clf.fit(X_train, Y_train)
 
 ###################################### Testing ##########################################
 test_month = "1"
@@ -48,7 +50,7 @@ X_test = x_test.reshape(-1, 5)
 Y_actual = y_actual.reshape(-1, 1)
 
 ######predict################
-Y_pred = LogReg.predict(X_test)
+Y_pred = clf.predict(X_test)
 
 no =0
 match  =0
@@ -60,5 +62,6 @@ for i, j in zip(Y_actual,Y_pred):
 print("RR", match/no, "\n")
 confusion_matrix = confusion_matrix(Y_actual, Y_pred)
 print(confusion_matrix)
+
 accuracy = (confusion_matrix[0][0] +  confusion_matrix[1][1])  / (sum(confusion_matrix[0]) + sum(confusion_matrix[1]))
 print(accuracy)
